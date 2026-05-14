@@ -15,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CCACHE: 1
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+    - uses: actions/checkout@v
       with:
         persist-credentials: false
 
@@ -36,7 +37,7 @@ jobs:
         echo "ccache-path=$(echo '~/.cache/ccache')" >> $GITHUB_OUTPUT
 
     - name: ccache cache files
-      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      uses: actions/cache@v5
       with:
         path: ${{ steps.get-vars.outputs.ccache-path }}
         # double-dash after compiler is not a typo, it is to disambiguate between g++-<date> and g++-11-<date> for restore key prefix matching
@@ -88,7 +89,7 @@ jobs:
       run: ./build-scripts/prepare-web.sh
 
     - name: Create artifact
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      uses: actions/upload-artifact@v7
       with:
         name: play-cdda
         path: build/*
