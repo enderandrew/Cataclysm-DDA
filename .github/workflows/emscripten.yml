@@ -63,7 +63,7 @@ jobs:
         ccache -M 20G
         ccache --show-stats
 
-        ./build-scripts/build-emscripten.sh
+        env CLANG=1 CXXFLAGS="-Wno-error=unknown-warning-option" ./build-scripts/build-emscripten.sh CATA_NO_SNMALLOC=1
 
     - name: post-build ccache manipulation
       run: |
