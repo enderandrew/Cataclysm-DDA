@@ -3,6 +3,15 @@
 #include "prevent_fork.h"
 #include "snmalloc/stl/atomic.h"
 
+#ifdef __EMSCRIPTEN__
+namespace snmalloc {
+    struct Aal {
+        static void pause() {
+            // Do nothing on WebAssembly
+        }
+    };
+}
+#endif
 namespace snmalloc
 {
   /*
