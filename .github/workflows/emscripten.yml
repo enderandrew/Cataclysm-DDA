@@ -2,6 +2,7 @@ name: Emscripten build
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 # We only care about the latest revision of a PR, so cancel previous instances.
 concurrency:
